@@ -352,7 +352,9 @@ export default {
       this.$emit('on-click-clear-icon')
     },
     focus () {
-      this.$refs.input.focus()
+      setTimeout(() => { // 修改
+        this.$refs.input.focus()
+      }, 10)
     },
     blur () {
       this.$refs.input.blur()
@@ -372,12 +374,15 @@ export default {
     onBlur ($event) {
       this.setTouched()
       this.validate()
-      this.isFocus = false
+      setTimeout(() => { // 修改
+        this.isFocus = false
+       }, 10)
       this.$emit('on-blur', this.currentValue, $event)
     },
     onKeyUp (e) {
       if (e.key === 'Enter') {
         e.target.blur()
+        this.isFocus = true // 修改
         this.$emit('on-enter', this.currentValue, e)
       }
     },
